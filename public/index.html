@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NangZoe</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">NangZoe</h1>
+            <p class="subtitle">Local Network File Sharing</p>
+
+            <div class="status">
+                <span class="status-dot"></span>
+                Connected to Local network
+            </div>
+        </header>
+
+        <div class="card">
+            <h2>Upload Files</h2>
+            <div class="upload-area">
+                <div class="upload-icon"><img src="upload.png" alt="Upload" height="60px"></div>
+                <p>Select a file to share</p>
+
+                <form id="uploadForm">
+                    <input type="file" id="fileInput" name="file" required>
+                    <br>
+                    <button type="submit">Upload</button>
+                </form>
+                <p id="uploadStatus"></p>
+            </div>
+        </div>
+        <div class="card">
+            <h2>Shared Files</h2>
+            <ul id="fileList" class="file-list">
+                <li class="empty">Loading...</li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        function getFileIcon(filename) {
+            const extension =
+                filename
+                    .split(".")
+                    .pop()
+                    .toLowerCase();
+            if (
+                ["jpg", "jpeg", "png", "gif", "webp"]
+                .includes(extension)
+            ) {
+                return "🖼️";
+            }
+            if (
+                ["mp4", "mkv", "avi", "mov"]
+                .includes(extension)
+            ) {
+                return "🎬";
+            }
+            if (
+                ["mp3", "wav", "ogg"]
+                .includes(extension)
+            ) {
+                return "🎵";
+            }
+            if (
+                ["pdf"]
+                .includes(extension)
+            ) {
+                return "📕";
+            }
+            if (
+                ["doc", "docx"]
+                .includes(extension)
+            ) {
+                return "📘";
+            }
+            if (
+                ["zip", "rar", "7z"]
+                .includes(extension)
+            ) {
+                return "📦";
+            }
+            return "📄";
+        }
+
+        function loadFiles(){
+        fetch("/files")
+            .then(response => response.json())
+            .then(files => {
+                const fileList = document.getElementById("fileList");
+                fileList.innerHTML = "";
+
+                if(files.length==0){
+                    fileList.innerHTML=`
+                        <li class="empty">
+                            No files shared yet.
+                        </li>
+                    `;
+                    return;
+                }
+
+                files.forEach(file => {
+                    const listItem = document.createElement("li");
+                    listItem.className="file-item";
+                    const fileInfo = document.createElement("div");
+                    fileInfo.className = "file-info";
+                    const icon = document.createElement("span");
+                    icon.className = "file-icon";
+                    icon.textContent=getFileIcon(file);
+                    const fileName = document.createElement("span");
+                    fileName.textContent = file;
+                    fileInfo.appendChild(icon);
+                    fileInfo.appendChild(fileName);
+                    const link = document.createElement("a");
+                    link.className = "download-btn";
+                    link.href = "/download/" + encodeURIComponent(file);
+                    link.textContent="Download";
+                    listItem.appendChild(fileInfo);
+                    listItem.appendChild(link);
+                    fileList.appendChild(listItem);
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
+
+        document.getElementById("uploadForm").addEventListener("submit",function(event){
+            event.preventDefault();
+
+            const fileInput = document.getElementById("fileInput")
+            const status = document.getElementById("uploadStatus");
+            const formData = new FormData();
+            formData.append("file",fileInput.files[0]);
+            status.textContent="Uploading...";
+
+            fetch("/upload",{
+                method: "POST",
+                body: formData
+            })
+
+            .then(response => response.text())
+            .then(message=>{
+                status.textContent=message;
+                fileInput.value = "";
+                loadFiles();
+            })
+            .catch(error=>{
+                console.error(error);
+                status.textContent = "Upload failed.";
+            });
+        });
+
+        loadFiles();
+    </script>
+</body>
+</html>
