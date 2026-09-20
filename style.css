@@ -1,0 +1,311 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+}
+
+.constainer {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    padding: 30px 0 20px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 5px;
+    color: #6b7280;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #e8f7ee;
+    color: #187a3d;
+
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+
+    padding: 30px 20px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: #64748b;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #1f2937;
+}
+
+
+/* Main container */
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+
+/* Header */
+
+header {
+    padding: 30px 0 20px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.subtitle {
+    margin-top: 5px;
+    color: #6b7280;
+}
+
+
+/* Connection status */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: #e8f7ee;
+    color: #187a3d;
+
+    padding: 6px 12px;
+    border-radius: 20px;
+
+    font-size: 14px;
+    margin-top: 15px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+
+/* Cards */
+
+.card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+
+/* Upload area */
+
+.upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 10px;
+
+    padding: 30px 20px;
+    text-align: center;
+
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    border-color: #64748b;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+
+/* File input */
+
+input[type="file"] {
+    width: 100%;
+    margin: 15px 0;
+}
+
+
+/* Buttons */
+
+button {
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 18px;
+
+    font-size: 15px;
+    cursor: pointer;
+
+    background: #2563eb;
+    color: white;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+
+/* Upload status */
+
+#uploadStatus {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+/* File list */
+
+.file-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-width: 0;
+}
+
+.file-icon {
+    font-size: 24px;
+}
+
+.file-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.download-btn {
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: bold;
+
+    padding: 6px 10px;
+}
+
+
+/* Empty state */
+
+.empty {
+    text-align: center;
+    color: #6b7280;
+    padding: 25px 0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 92%;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .file-item {
+        gap: 10px;
+    }
+
+    .download-btn {
+        padding: 6px;
+    }
+
+}
